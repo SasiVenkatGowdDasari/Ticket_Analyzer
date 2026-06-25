@@ -8,34 +8,38 @@ Built using **Spring Boot**, **MySQL**, and **Vanilla JavaScript**, this project
 
 ## 🚀 Features
 
-- Create new support tickets
-- View all submitted tickets
-- View complete ticket details
-- Automatic timestamp generation
-- Default ticket status (`OPEN`)
-- RESTful API architecture
-- Responsive user interface
+* Create new support tickets
+* View all submitted tickets
+* View complete ticket details
+* Automatic timestamp generation
+* Default ticket status (`OPEN`)
+* RESTful API architecture
+* Responsive user interface
 
 ---
 
 ## 🛠 Tech Stack
 
 ### Frontend
-- HTML5
-- CSS3
-- JavaScript
+
+* HTML5
+* CSS3
+* JavaScript
 
 ### Backend
-- Java 17
-- Spring Boot
-- Spring Web
-- Spring Data JPA
+
+* Java 17
+* Spring Boot
+* Spring Web
+* Spring Data JPA
 
 ### Database
-- MySQL
+
+* MySQL
 
 ### Build Tool
-- Maven
+
+* Maven
 
 ---
 
@@ -61,14 +65,37 @@ Ticket_Analyzer/
 
 # ⚙️ Prerequisites
 
-Before running the project, install:
+Before running the project, install the following:
 
-- Java JDK 17+
-- Maven
-- MySQL Server
-- Git
-- VS Code or STS/IntelliJ IDEA
-- Modern Web Browser
+* Java JDK 17+
+* Maven
+* MySQL Server
+* Git
+* VS Code / STS / IntelliJ IDEA
+* Modern Web Browser
+
+---
+
+# 📥 Clone the Repository
+
+Clone the repository from GitHub.
+
+```bash
+git clone https://github.com/SasiVenkatGowdDasari/Ticket_Analyzer.git
+```
+
+Navigate into the project folder.
+
+```bash
+cd Ticket_Analyzer
+```
+
+You should now have the following folders:
+
+```text
+Support_Ticket_Analyzer/
+Support_Ticket_Analyzer_Frontend/
+```
 
 ---
 
@@ -80,37 +107,47 @@ Create a MySQL database.
 CREATE DATABASE ticket_management_db;
 ```
 
-Update the database credentials inside:
+Open
 
 ```text
 Support_Ticket_Analyzer/src/main/resources/application.properties
 ```
 
+Update your database credentials.
+
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/ticket_management_db
+spring.datasource.url=jdbc:mysql://localhost:3306/ticket_management_db?useSSL=false&serverTimezone=UTC
 spring.datasource.username=root
 spring.datasource.password=YOUR_PASSWORD
 
 spring.jpa.hibernate.ddl-auto=update
 ```
 
+The application will automatically create the required tables on startup.
+
 ---
 
 # ▶️ Running the Backend
 
-Navigate to the backend folder.
+Open a terminal.
+
+Navigate to the backend project.
 
 ```bash
 cd Support_Ticket_Analyzer
 ```
 
-Start the Spring Boot application.
+Install dependencies and start the Spring Boot server.
+
+```bash
+mvn clean install
+```
 
 ```bash
 mvn spring-boot:run
 ```
 
-The backend will be available at:
+Backend URL
 
 ```
 http://localhost:8080
@@ -119,6 +156,8 @@ http://localhost:8080
 ---
 
 # ▶️ Running the Frontend
+
+Open another terminal.
 
 Navigate to the frontend folder.
 
@@ -132,63 +171,97 @@ Open
 index.html
 ```
 
-using any web browser.
+in your browser.
 
 ### Recommended
 
-Use the **Live Server** extension in VS Code.
+Run the frontend using the **Live Server** extension in VS Code.
+
+The frontend communicates with
+
+```
+http://localhost:8080
+```
+
+Ensure the backend is running before opening the frontend.
 
 ---
 
 # 💻 How to Use
 
-### 1. Create a Ticket
+### Step 1 — Start the Backend
 
-- Enter Customer Name
-- Enter Issue Title
-- Enter Issue Description
-- Click **Submit**
+Run the Spring Boot application.
 
----
-
-### 2. View All Tickets
-
-- Open the Dashboard
-- All tickets will be fetched automatically from the backend.
+```
+http://localhost:8080
+```
 
 ---
 
-### 3. View Ticket Details
+### Step 2 — Open the Frontend
 
-- Click any ticket.
-- View:
-  - Customer Name
-  - Issue Title
-  - Issue Description
-  - Status
-  - Created Date & Time
+Open
+
+```
+index.html
+```
+
+using Live Server or any web browser.
+
+---
+
+### Step 3 — Create a Ticket
+
+Fill in:
+
+* Customer Name
+* Issue Title
+* Issue Description
+
+Click **Submit**.
+
+---
+
+### Step 4 — View All Tickets
+
+The dashboard automatically loads every ticket from the backend.
+
+---
+
+### Step 5 — View Ticket Details
+
+Click any ticket to see:
+
+* Customer Name
+* Issue Title
+* Issue Description
+* Ticket Status
+* Created Date & Time
 
 ---
 
 # 📡 REST API
 
-| Method | Endpoint | Description |
-|---------|----------|-------------|
-| POST | `/api/tickets` | Create Ticket |
-| GET | `/api/tickets` | Get All Tickets |
-| GET | `/api/tickets/{id}` | Get Ticket by ID |
+| Method | Endpoint            | Description      |
+| ------ | ------------------- | ---------------- |
+| POST   | `/api/tickets`      | Create Ticket    |
+| GET    | `/api/tickets`      | Get All Tickets  |
+| GET    | `/api/tickets/{id}` | Get Ticket by ID |
 
 ---
 
 ## Sample Request
 
-```json
+```http
 POST /api/tickets
+```
 
+```json
 {
-    "customerName": "John Doe",
-    "issueTitle": "Login Issue",
-    "issueDescription": "Unable to login."
+  "customerName": "John Doe",
+  "issueTitle": "Login Issue",
+  "issueDescription": "Unable to login."
 }
 ```
 
@@ -198,13 +271,16 @@ POST /api/tickets
 
 ```json
 {
-    "id": 1,
-    "customerName": "John Doe",
-    "issueTitle": "Login Issue",
-    "issueDescription": "Unable to login.",
-    "status": "OPEN",
-    "createdAt": "2026-06-25T10:30:00"
+  "id": 1,
+  "customerName": "John Doe",
+  "issueTitle": "Login Issue",
+  "issueDescription": "Unable to login.",
+  "status": "OPEN",
+  "createdAt": "2026-06-25T10:30:00"
 }
 ```
 
 ---
+
+---
+
