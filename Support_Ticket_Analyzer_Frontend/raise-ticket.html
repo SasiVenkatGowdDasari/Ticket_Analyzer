@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Raise Ticket</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html">← Back Home</a>
+        <h2>Submit a New Issue</h2>
+        
+        <form id="ticketForm">
+            <label>Customer Name:</label>
+            <input type="text" id="customerName" required>
+
+            <label>Issue Title:</label>
+            <input type="text" id="issueTitle" required>
+
+            <label>Issue Description:</label>
+            <textarea id="issueDescription" rows="5" required></textarea>
+
+            <button type="submit">Submit Ticket</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('ticketForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            
+            const ticketData = {
+                customerName: document.getElementById('customerName').value,
+                issueTitle: document.getElementById('issueTitle').value,
+                issueDescription: document.getElementById('issueDescription').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:8080/api/tickets', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(ticketData)
+                });
+
+                if (response.ok) {
+                    alert('Ticket successfully created!');
+                    window.location.href = 'view-tickets.html';
+                } else {
+                    alert('Error creating ticket.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Could not connect to the backend server.');
+            }
+        });
+    </script>
+</body>
+</html>

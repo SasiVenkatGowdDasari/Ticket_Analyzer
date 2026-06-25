@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="view-tickets.html">← Back to List</a>
+        <h2>Ticket Details</h2>
+        
+        <div id="detailsContainer">
+            <p>Loading details...</p>
+        </div>
+    </div>
+
+    <script>
+        async function fetchTicketDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const ticketId = urlParams.get('id');
+
+            if (!ticketId) {
+                document.getElementById('detailsContainer').innerHTML = '<p>Invalid ticket ID.</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:8080/api/tickets/${ticketId}`);
+                
+                if (response.ok) {
+                    const ticket = await response.json();
+                    
+                    const detailsHtml = `
+                        <h3>#${ticket.id} - ${ticket.issueTitle}</h3>
+                        <p><strong>Customer:</strong> ${ticket.customerName}</p>
+                        <p><strong>Status:</strong> ${ticket.status}</p>
+                        <p><strong>Date Created:</strong> ${new Date(ticket.createdAt).toLocaleString()}</p>
+                        <hr>
+                        <p><strong>Description:</strong></p>
+                        <p>${ticket.issueDescription}</p>
+                    `;
+                    document.getElementById('detailsContainer').innerHTML = detailsHtml;
+                } else {
+                    document.getElementById('detailsContainer').innerHTML = '<p>Ticket not found.</p>';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('detailsContainer').innerHTML = '<p>Failed to load details.</p>';
+            }
+        }
+
+
+        fetchTicketDetails();
+    </script>
+</body>
+</html>

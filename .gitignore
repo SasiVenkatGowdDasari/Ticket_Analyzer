@@ -1,0 +1,12 @@
+# Ignore STS workspace files
+.metadata/
+**/.metadata/
+
+# Ignore Spring Boot compiled files
+**/target/
+**/*.jar
+**/*.class
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
